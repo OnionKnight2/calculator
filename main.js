@@ -56,7 +56,7 @@ function createButtons() {
 
 // Function that colors some buttons
 function colorButtons() {
-    const green = ['()', '%', "÷", 'x', '-', '+'];
+    const green = ['()', '%', '÷', 'x', '-', '+'];
     const equal = '=';
     const clear = 'C';
     const buttons = document.querySelectorAll('button');
@@ -66,11 +66,39 @@ function colorButtons() {
         }
         else if (button.textContent === clear) {
             button.style.color = "#E5320E";
+            button.classList.add('clear');
         } 
         else if (button.textContent === equal) {
             button.style.backgroundColor = "#398E01";
+            button.classList.add('equal');
         }
     });
+}
+
+// Function that adds appropriate classes to all of the buttons
+function addClasses() {
+    const basicOps = ['÷', 'x', '-', '+'];
+    const helpOps = ['()', '%', '+/-', '.'];
+    const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        if (basicOps.includes(button.textContent)) {
+            button.classList.add('basic-operation');
+        }
+        else if (helpOps.includes(button.textContent)) {
+            button.classList.add('help-operation');
+        }
+        else if (digits.includes(button.textContent)) {
+            button.classList.add('digit');
+        }
+    })
+}
+
+// Function hides some operator buttons
+function hideButtons() {
+    const helpOps = document.querySelectorAll('.help-operation');
+    helpOps.forEach((help) => help.style.visibility = 'hidden');
 }
 
 // Function that creates a display for the calculator
@@ -79,11 +107,59 @@ function createDisplay() {
     const display = document.createElement('div');
     displayContainer.appendChild(display);
     display.classList.add('display');
+}
 
-    display.textContent = '1231';
+// This function will listen for a click event on number buttons
+function listenNumberClick() {
+    const digits = document.querySelectorAll('.digit');
+    
+    digits.forEach((digit) => digit.addEventListener('click', populateDisplay));
+}
+
+// This function will populate display based on clicked numbers
+function populateDisplay(e) {
+    const display = document.querySelector('.display');
+    display.textContent += e.target.textContent;
+}
+
+// Function will make the calculator work. 
+// Number that user types before operator will be the first number, 
+// then comes the operator and then a second operator
+// After selecting equality operator, result will be shown inside display
+// Also, C button will clear everything, backspace will delete last character
+function calculate() {
+    listenNumberClick();
+    const display = document.querySelector('.display');
+    let firstNumber = null;
+    let secondNumber = null; 
+    let operator = null;
+    const operators = document.querySelectorAll('.basic-operation');
+    const clear = document.querySelector('.clear');
+    const backspace = document.querySelector('.backspace-button');
+    const equal = document.querySelector('.equal');
+
+    // Clear
+    clear.addEventListener('click', (e) => {
+        display.textContent = "";
+        firstNumber = null;
+        secondNumber = null;
+        operator = null;
+    });
+
+    // Backspace
+    backspace.addEventListener('click', (e) => {
+        const textContentArr = display.textContent.split("");
+        textContentArr.pop();
+        display.textContent = textContentArr.join("");
+    });
+
+    // Calculation
+    
 }
 
 // Main part of the program that calls all other functions
-let firstNumber, secondNumber, operator;
 createButtons();
+addClasses();
+hideButtons();
 createDisplay();
+calculate();
