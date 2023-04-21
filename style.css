@@ -36,8 +36,8 @@ body {
 .display-container .display {
     color: whitesmoke;
     margin-top: 12px;
-    margin-right: 4px;
     font-size: 28px;
+    overflow: hidden;
 }
 
 .display-container .display-backup {
