@@ -14,3 +14,5 @@ do math operations, use dot to write decimal numbers.
 
 When an equals sign is clicked, user is displayed final result on their
 operation.
+
+Live preview: https://onionknight2.github.io/calculator/
