@@ -24,7 +24,7 @@ function operate(firstNumber, secondNumber, operator) {
             return subtract(firstNumber, secondNumber);
         case '*':
             return multiply(firstNumber, secondNumber);
-        case 'x':
+        case '×':
             return multiply(firstNumber, secondNumber);
         case '/':
             return divide(firstNumber, secondNumber);
@@ -38,7 +38,7 @@ function operate(firstNumber, secondNumber, operator) {
 // Function that creates buttons for each digit, operation, equalization and a clear button
 function createButtons() {
     const buttonsContainer = document.querySelector('.button-container');
-    const buttonsArray = ['C', '()', '%', '÷', 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, '.', '='];
+    const buttonsArray = ['C', '()', '%', '÷', 7, 8, 9, '×', 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, '.', '='];
     for (let i = 0; i < buttonsArray.length; i++) {
         const button = document.createElement('button');
         buttonsContainer.appendChild(button);
@@ -56,7 +56,7 @@ function createButtons() {
 
 // Function that colors some buttons
 function colorButtons() {
-    const green = ['()', '%', '÷', 'x', '-', '+'];
+    const green = ['()', '%', '÷', '×', '-', '+'];
     const equal = '=';
     const clear = 'C';
     const buttons = document.querySelectorAll('button');
@@ -69,7 +69,6 @@ function colorButtons() {
             button.classList.add('clear');
         } 
         else if (button.textContent === equal) {
-            button.style.backgroundColor = "#398E01";
             button.classList.add('equal');
         }
     });
@@ -77,7 +76,7 @@ function colorButtons() {
 
 // Function that adds appropriate classes to all of the buttons
 function addClasses() {
-    const basicOps = ['÷', 'x', '-', '+'];
+    const basicOps = ['÷', '×', '-', '+'];
     const helpOps = ['()', '%', '+/-', '.'];
     const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
