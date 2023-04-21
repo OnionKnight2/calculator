@@ -56,11 +56,12 @@ function createButtons() {
 
 // Function that colors some buttons
 function colorButtons() {
-    const green = ['()', '%', '÷', '×', '-', '+'];
+    const green = ['()', '÷', '×', '-', '+'];
     const equal = '=';
     const clear = 'C';
     const dot = '.';
-    const reverse = '+/-'
+    const reverse = '+/-';
+    const percentage = '%';
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         if (green.includes(button.textContent)) {
@@ -79,13 +80,17 @@ function colorButtons() {
         else if (button.textContent === reverse) {
             button.classList.add('reverse');
         }
+        else if (button.textContent === percentage) {
+            button.classList.add('percentage');
+            button.style.color = "#58db00";
+        }
     });
 }
 
 // Function that adds appropriate classes to all of the buttons
 function addClasses() {
     const basicOps = ['÷', '×', '-', '+'];
-    const helpOps = ['()', '%'];
+    const helpOps = ['()'];
     const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
     const buttons = document.querySelectorAll('button');
@@ -153,6 +158,7 @@ function calculate() {
     const equal = document.querySelector('.equal');
     const dot = document.querySelector('.dot');
     const reverse = document.querySelector('.reverse');
+    const percentage = document.querySelector('.percentage');
 
     // Clear
     clear.addEventListener('click', (e) => {
@@ -231,6 +237,14 @@ function calculate() {
         if (display.textContent === "" || display.textContent.charAt(display.textContent.length - 1) === ".") {}
         else {
             display.textContent *= (-1);
+        }
+    });
+
+    // Listen for a click on a % button that changes number into a percentage
+    percentage.addEventListener('click', () => {
+        if (display.textContent === "" || display.textContent.charAt(display.textContent.length - 1) === ".") {}
+        else {
+            display.textContent = display.textContent / 100;
         }
     });
 }
