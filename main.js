@@ -154,42 +154,100 @@ function enterKeys() {
         digitButtons.forEach((btn) => {
             if (btn.textContent === e.key) {
                 btn.click();
+                changeClickColors(btn, "#121111", "#4a4545");
             }
         });
 
         operationButtons.forEach((btn) => {
             if (btn.textContent === e.key) {
                 btn.click();
+                changeClickColors(btn, "#121111", "#4a4545");
             }
             if (e.key === '/') {
                 document.querySelector('.divide').click();
+                changeClickColors(document.querySelector('.divide'), "#121111", "#4a4545");
             }
             if (e.key === '*') {
                 document.querySelector('.multiply').click();
+                changeClickColors(document.querySelector('.multiply'), "#121111", "#4a4545");
             }
         });
 
         switch (e.key) {
             case 'c':
                 document.querySelector('.clear').click();
+                changeClickColors(document.querySelector('.clear'), "#121111", "#4a4545");
                 break;
             case '%':
                 document.querySelector('.percentage').click();
+                changeClickColors(document.querySelector('.percentage'), "#121111", "#4a4545");
                 break;
             case '.':
                 document.querySelector('.dot').click();
+                changeClickColors(document.querySelector('.dot'), "#121111", "#4a4545");
                 break;
             case 'Backspace':
                 document.querySelector('.backspace-button').click();
+                changeClickColors(document.querySelector('.backspace-button'), "#121111", "#4a4545");
                 break;
             case '=':
             case 'Enter':
                 document.querySelector('.equal').click();
+                changeClickColors(document.querySelector('.equal'), "#398E01", "darkgreen");
                 break;
         }
     });
 }
 
+// Function will change colors of the buttons when they are hovered
+function changeHoverColors() {
+    const buttons = document.querySelectorAll('button');
+
+    buttons.forEach((btn) => {
+        if (btn.textContent !== '=' && !btn.classList.contains('backspace-button')) {
+            btn.addEventListener('mouseover', () => {
+                btn.style.backgroundColor = "#4a4545";
+                btn.style.transition = "font-size 0.1s";
+                btn.style.fontSize = "20px";
+            });
+            btn.addEventListener('mouseout', () => {
+                btn.style.backgroundColor = "#121111";
+                btn.style.fontSize = "28px";
+            })
+        } 
+        else if (btn.textContent === '=') {
+            btn.addEventListener('mouseover', () => {
+                btn.style.backgroundColor = "darkgreen";
+                btn.style.transition = "font-size 0.1s";
+                btn.style.fontSize = "20px";
+            });
+            btn.addEventListener('mouseout', () => {
+                btn.style.backgroundColor = "#398E01";
+                btn.style.fontSize = "28px";
+            })
+        }
+        else {
+            btn.addEventListener('mouseover', () => {
+                btn.style.backgroundColor = "#4a4545";
+                btn.style.transition = "font-size 0.1s";
+                btn.style.fontSize = "12px";
+            });
+            btn.addEventListener('mouseout', () => {
+                btn.style.backgroundColor = "#121111";
+                btn.style.fontSize = "16px";
+            });
+        }
+    });
+}
+
+// Function will change colors of the buttons when they are clicked
+function changeClickColors(btn, defaultColor, newColor) {
+    btn.style.backgroundColor = newColor;
+
+    setTimeout(() => {
+        btn.style.backgroundColor = defaultColor;
+    }, 150);
+}
 
 // Function will make the calculator work. 
 // Number that user types before operator will be the first number, 
@@ -198,6 +256,7 @@ function enterKeys() {
 // Also, C button will clear everything, backspace will delete last character
 // Enable user to input decimals via a . button
 function calculate() {
+    changeHoverColors();
     enterKeys();
     listenNumberClick();
     const display = document.querySelector('.display');
