@@ -1,6 +1,6 @@
 // Functions for basic math operators
 function add(a, b) {
-    return a + b;
+    return Number(a) + Number(b);
 }
 
 function subtract(a, b) {
@@ -155,6 +155,40 @@ function calculate() {
 
     // Calculation
     
+    // Listen for click on the operators
+    operators.forEach((op) => {
+        op.addEventListener('click', (e) => {
+            if (display.textContent === "") {
+                alert("Enter a number");
+            }
+            else if (!firstNumber) {
+                firstNumber = display.textContent;
+                operator = e.target.textContent;
+                display.textContent = "";
+            }
+            else {
+                secondNumber = display.textContent;
+                firstNumber = operate(firstNumber, secondNumber, operator);
+                display.textContent = "";
+                secondNumber = null;
+                operator = e.target.textContent;
+            }
+        });
+    });
+
+    // Listen for click on the equal button 
+    equal.addEventListener('click', (eq) => {
+        if (!firstNumber || (!secondNumber && display.textContent === "") || !operator) {
+            alert("Enter a valid operation");
+        }
+        else {
+            secondNumber = display.textContent;
+            display.textContent = operate(firstNumber, secondNumber, operator);
+            firstNumber = null;
+            operator = null;
+            secondNumber = null;
+        }
+    });
 }
 
 // Main part of the program that calls all other functions
