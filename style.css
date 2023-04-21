@@ -17,6 +17,7 @@ body {
     font-size: 60px;
     font-weight: bold;
     color: #babdbf;
+    font-family: 'Libre Baskerville', serif;
 }
 
 .container .calculator {
@@ -38,6 +39,7 @@ body {
     margin-top: 12px;
     font-size: 28px;
     overflow: hidden;
+    font-family: 'Electrolize', sans-serif;
 }
 
 .display-container .display-backup {
@@ -47,6 +49,7 @@ body {
     font-size: 16px;
     font-weight: lighter;
     font-style: italic;
+    font-family: 'Electrolize', sans-serif;
 }
 
 .calculator .backspace-container {
@@ -101,4 +104,12 @@ body {
     width: 0;
     height: 0;
     display: none;
+}
+
+button.button.equal {
+    background-color: #398E01;
+}
+
+button.button.equal:hover {
+    background-color: darkgreen;
 }
