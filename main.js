@@ -1,14 +1,14 @@
 // Functions for basic math operators
 function add(a, b) {
-    return Number(a) + Number(b);
+    return (Math.round((Number(a) + Number(b)) * 100)) / 100;
 }
 
 function subtract(a, b) {
-    return a - b;
+    return (Math.round((a - b) * 100)) / 100;
 }
 
 function multiply(a, b) {
-    return a * b;
+    return (Math.round(a * b * 100)) / 100
 }
 
 function divide(a, b) {
@@ -59,6 +59,7 @@ function colorButtons() {
     const green = ['()', '%', '÷', '×', '-', '+'];
     const equal = '=';
     const clear = 'C';
+    const dot = '.';
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         if (green.includes(button.textContent)) {
@@ -71,13 +72,16 @@ function colorButtons() {
         else if (button.textContent === equal) {
             button.classList.add('equal');
         }
+        else if (button.textContent === dot) {
+            button.classList.add('dot');
+        }
     });
 }
 
 // Function that adds appropriate classes to all of the buttons
 function addClasses() {
     const basicOps = ['÷', '×', '-', '+'];
-    const helpOps = ['()', '%', '+/-', '.'];
+    const helpOps = ['()', '%', '+/-'];
     const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
     const buttons = document.querySelectorAll('button');
@@ -131,6 +135,7 @@ function populateDisplay(e) {
 // then comes the operator and then a second operator
 // After selecting equality operator, result will be shown inside display
 // Also, C button will clear everything, backspace will delete last character
+// Enable user to input decimals via a . button
 function calculate() {
     listenNumberClick();
     const display = document.querySelector('.display');
@@ -142,6 +147,7 @@ function calculate() {
     const clear = document.querySelector('.clear');
     const backspace = document.querySelector('.backspace-button');
     const equal = document.querySelector('.equal');
+    const dot = document.querySelector('.dot');
 
     // Clear
     clear.addEventListener('click', (e) => {
@@ -150,12 +156,16 @@ function calculate() {
         firstNumber = null;
         secondNumber = null;
         operator = null;
+        dot.disabled = false;
+        
     });
 
     // Backspace
     backspace.addEventListener('click', (e) => {
         const textContentArr = display.textContent.split("");
-        textContentArr.pop();
+        if (textContentArr.pop() === '.') {
+            dot.disabled = false;
+        }
         display.textContent = textContentArr.join("");
     });
 
@@ -166,13 +176,13 @@ function calculate() {
         op.addEventListener('click', (e) => {
             if (display.textContent === "") {
                 displayBackup.textContent = "";
-                alert("Enter a number");
             }
             else if (!firstNumber) {
                 firstNumber = display.textContent;
                 operator = e.target.textContent;
                 display.textContent = "";
                 displayBackup.textContent = "";
+                dot.disabled = false;
             }
             else {
                 displayBackup.textContent = "";
@@ -182,14 +192,14 @@ function calculate() {
                 displayBackup.textContent = firstNumber;
                 secondNumber = null;
                 operator = e.target.textContent;
+                dot.disabled = false;
             }
         });
     });
 
     // Listen for click on the equal button 
-    equal.addEventListener('click', (eq) => {
-        if (!firstNumber || (!secondNumber && display.textContent === "") || !operator) {
-            alert("Enter a valid operation");
+    equal.addEventListener('click', () => {
+        if (!firstNumber || (!secondNumber && display.textContent === "") || !operator) {      
         }
         else {
             secondNumber = display.textContent;
@@ -197,6 +207,17 @@ function calculate() {
             firstNumber = null;
             operator = null;
             secondNumber = null;
+            dot.disabled = true;
+        }
+    });
+
+    // Listen for a click on a dot button
+    dot.addEventListener('click', (d) => {
+        if (display.textContent === "") {
+        }
+        else if (!dot.disabled) {
+            display.textContent += '.';
+            dot.disabled = true;
         }
     });
 }
