@@ -148,7 +148,6 @@ function populateDisplay(e) {
 
 // Function will add same logic only for keyboard inputs
 function enterKeys() {
-    const availableChars = ['÷', '×'];
     const digitButtons = document.querySelectorAll('.digit');
     const operationButtons = document.querySelectorAll('.basic-operation');
     document.addEventListener('keydown', (e) => {
