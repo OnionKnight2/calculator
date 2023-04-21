@@ -12,7 +12,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return (Math.round(a / b * 100)) / 100;
 }
 
 // Function that takes an operator and 2 numbers and calls one of the above functions
