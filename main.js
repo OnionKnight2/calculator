@@ -105,8 +105,11 @@ function hideButtons() {
 function createDisplay() {
     const displayContainer = document.querySelector('.display-container');
     const display = document.createElement('div');
+    const displayBackup = document.createElement('div');
     displayContainer.appendChild(display);
+    displayContainer.appendChild(displayBackup);
     display.classList.add('display');
+    displayBackup.classList.add('display-backup');    
 }
 
 // This function will listen for a click event on number buttons
@@ -118,8 +121,10 @@ function listenNumberClick() {
 
 // This function will populate display based on clicked numbers
 function populateDisplay(e) {
+    const displayBackup = document.querySelector('.display-backup')
     const display = document.querySelector('.display');
     display.textContent += e.target.textContent;
+    displayBackup.textContent = "";
 }
 
 // Function will make the calculator work. 
@@ -130,6 +135,7 @@ function populateDisplay(e) {
 function calculate() {
     listenNumberClick();
     const display = document.querySelector('.display');
+    const displayBackup = document.querySelector('.display-backup')
     let firstNumber = null;
     let secondNumber = null; 
     let operator = null;
@@ -141,6 +147,7 @@ function calculate() {
     // Clear
     clear.addEventListener('click', (e) => {
         display.textContent = "";
+        displayBackup.textContent = "";
         firstNumber = null;
         secondNumber = null;
         operator = null;
@@ -159,17 +166,21 @@ function calculate() {
     operators.forEach((op) => {
         op.addEventListener('click', (e) => {
             if (display.textContent === "") {
+                displayBackup.textContent = "";
                 alert("Enter a number");
             }
             else if (!firstNumber) {
                 firstNumber = display.textContent;
                 operator = e.target.textContent;
                 display.textContent = "";
+                displayBackup.textContent = "";
             }
             else {
+                displayBackup.textContent = "";
                 secondNumber = display.textContent;
                 firstNumber = operate(firstNumber, secondNumber, operator);
                 display.textContent = "";
+                displayBackup.textContent = firstNumber;
                 secondNumber = null;
                 operator = e.target.textContent;
             }
