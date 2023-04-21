@@ -60,6 +60,7 @@ function colorButtons() {
     const equal = '=';
     const clear = 'C';
     const dot = '.';
+    const reverse = '+/-'
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         if (green.includes(button.textContent)) {
@@ -75,13 +76,16 @@ function colorButtons() {
         else if (button.textContent === dot) {
             button.classList.add('dot');
         }
+        else if (button.textContent === reverse) {
+            button.classList.add('reverse');
+        }
     });
 }
 
 // Function that adds appropriate classes to all of the buttons
 function addClasses() {
     const basicOps = ['÷', '×', '-', '+'];
-    const helpOps = ['()', '%', '+/-'];
+    const helpOps = ['()', '%'];
     const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
     const buttons = document.querySelectorAll('button');
@@ -148,6 +152,7 @@ function calculate() {
     const backspace = document.querySelector('.backspace-button');
     const equal = document.querySelector('.equal');
     const dot = document.querySelector('.dot');
+    const reverse = document.querySelector('.reverse');
 
     // Clear
     clear.addEventListener('click', (e) => {
@@ -212,12 +217,20 @@ function calculate() {
     });
 
     // Listen for a click on a dot button
-    dot.addEventListener('click', (d) => {
+    dot.addEventListener('click', () => {
         if (display.textContent === "") {
         }
         else if (!dot.disabled) {
             display.textContent += '.';
             dot.disabled = true;
+        }
+    });
+
+    // Listen for a click on a +/- button that returns number * (-1)
+    reverse.addEventListener('click', () => {
+        if (display.textContent === "" || display.textContent.charAt(display.textContent.length - 1) === ".") {}
+        else {
+            display.textContent *= (-1);
         }
     });
 }
