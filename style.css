@@ -40,6 +40,15 @@ body {
     font-size: 28px;
 }
 
+.display-container .display-backup {
+    color: whitesmoke;
+    margin-top: 12px;
+    margin-right: 4px;
+    font-size: 16px;
+    font-weight: lighter;
+    font-style: italic;
+}
+
 .calculator .backspace-container {
     display: flex;
     justify-content: flex-end;
