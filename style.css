@@ -13,31 +13,30 @@ body {
 }
 
 .container .title {
-    margin: 24px;
-    font-size: 60px;
+    margin: 20px;
+    font-size: 50px;
     font-weight: bold;
-    color: #babdbf;
+    color: #398E01;
     font-family: 'Libre Baskerville', serif;
 }
 
 .container .calculator {
     display: flex;
     flex-direction: column;
-    width: 240px;
+    width: 320px;
 }
 
 .calculator .display-container {
     display: flex;
     justify-content: end;
-    width: 240px;
-    height: 120px;
+    width: 280px;
+    height: 60px;
     border: 1px solid black;
 }
 
 .display-container .display {
     color: whitesmoke;
-    margin-top: 12px;
-    font-size: 28px;
+    font-size: 32px;
     overflow: hidden;
     font-family: 'Electrolize', sans-serif;
 }
@@ -46,7 +45,7 @@ body {
     color: whitesmoke;
     margin-top: 12px;
     margin-right: 4px;
-    font-size: 12px;
+    font-size: 16px;
     opacity: 0.6;
     font-style: italic;
     font-family: 'Electrolize', sans-serif;
@@ -62,10 +61,10 @@ body {
 }
 
 .backspace-container .backspace-button {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: 1px solid black;
-    border-radius: 24px;
+    border-radius: 32px;
     background-color: #121111;
     font-size: 16px;
     transition: font-size 0.1s;
@@ -83,16 +82,16 @@ body {
 .calculator .button-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 20px;
     justify-content: center;
 }
 
 .button-container .button {
-    width: 50px;
-    height: 50px;
-    border-radius: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
     border: 1px solid black;
-    font-size: 24px;
+    font-size: 28px;
     background-color: #121111;
     color: whitesmoke;
     transition: font-size 0.1s;
@@ -100,7 +99,7 @@ body {
 
 .button-container .button:hover {
     background-color: #4A4545;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .button-container .button:active {
