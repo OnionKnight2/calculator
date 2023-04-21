@@ -56,7 +56,8 @@ function createButtons() {
 
 // Function that colors some buttons
 function colorButtons() {
-    const green = ['()', '÷', '×', '-', '+'];
+    const green = ['()', '-', '+'];
+    const weird = ['÷', '×'];
     const equal = '=';
     const clear = 'C';
     const dot = '.';
@@ -83,6 +84,12 @@ function colorButtons() {
         else if (button.textContent === percentage) {
             button.classList.add('percentage');
             button.style.color = "#58db00";
+        }
+        else if (weird.includes(button.textContent)) {
+            button.style.color = '#58db00';
+            if (button.textContent === '÷') {
+                button.classList.add('divide');
+            } else button.classList.add('multiply');
         }
     });
 }
@@ -139,6 +146,52 @@ function populateDisplay(e) {
     displayBackup.textContent = "";
 }
 
+// Function will add same logic only for keyboard inputs
+function enterKeys() {
+    const availableChars = ['÷', '×'];
+    const digitButtons = document.querySelectorAll('.digit');
+    const operationButtons = document.querySelectorAll('.basic-operation');
+    document.addEventListener('keydown', (e) => {
+        digitButtons.forEach((btn) => {
+            if (btn.textContent === e.key) {
+                btn.click();
+            }
+        });
+
+        operationButtons.forEach((btn) => {
+            if (btn.textContent === e.key) {
+                btn.click();
+            }
+            if (e.key === '/') {
+                document.querySelector('.divide').click();
+            }
+            if (e.key === '*') {
+                document.querySelector('.multiply').click();
+            }
+        });
+
+        switch (e.key) {
+            case 'c':
+                document.querySelector('.clear').click();
+                break;
+            case '%':
+                document.querySelector('.percentage').click();
+                break;
+            case '.':
+                document.querySelector('.dot').click();
+                break;
+            case 'Backspace':
+                document.querySelector('.backspace-button').click();
+                break;
+            case '=':
+            case 'Enter':
+                document.querySelector('.equal').click();
+                break;
+        }
+    });
+}
+
+
 // Function will make the calculator work. 
 // Number that user types before operator will be the first number, 
 // then comes the operator and then a second operator
@@ -146,6 +199,7 @@ function populateDisplay(e) {
 // Also, C button will clear everything, backspace will delete last character
 // Enable user to input decimals via a . button
 function calculate() {
+    enterKeys();
     listenNumberClick();
     const display = document.querySelector('.display');
     const displayBackup = document.querySelector('.display-backup')
